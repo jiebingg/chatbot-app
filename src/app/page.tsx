@@ -1,10 +1,10 @@
-import Link from "next/link";
+import LoginComponent from "./components/LoginComponent";
 
 export default function Home() {
   return (
-    <main>
+    <main className="app">
       <h1>Hello World</h1>
-      <Link href="/chatbot">Chatbot</Link>
+      <LoginComponent />
     </main>
   );
 }
