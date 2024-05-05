@@ -28,9 +28,3 @@ body {
     text-wrap: balance;
   }
 }
-
-.avatar-container {
-  @apply overflow-hidden rounded-full;
-  max-width: 40px;
-  max-height: 40px;
-}

@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import TypingAnimation from "../components/TypingAnimation";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -23,23 +23,29 @@ export type ChatProps = {
 const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
     const INITIAL_BOT_MESSAGE = 'Hello! Ask me anything';
     const [inputValue, setInputValue] = useState('');
-    const [chatLog, setChatLog] = useState<MessageObject[]>([{ type: MessageType.BOT, message: INITIAL_BOT_MESSAGE }]);
+    const [messages, setMessages] = useState<MessageObject[]>([{ type: MessageType.BOT, message: INITIAL_BOT_MESSAGE }]);
     const [isLoading, setIsLoading] = useState(false);
+    const messageEndRef = useRef<HTMLInputElement>(null);
     const { data: session } = useSession();
+
+    const scrollTobottom = () => {
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
+
+    useEffect(() => {
+        scrollTobottom();
+    }, [messages]);
 
     if (!session) return redirect("/");
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setChatLog((prevChatLog) => [...prevChatLog, { type: MessageType.USER, message: inputValue }])
-        sendMessage(inputValue);
+        const currentMessage = inputValue;
         setInputValue('');
-    }
-
-    const sendMessage = async (message: string) => {
+        setMessages((prevMessages) => [...prevMessages, { type: MessageType.USER, message: currentMessage }])
         setIsLoading(true);
-        const botMessage = await sendMessageCallback(session?.user?.email as string, message);
-        setChatLog((prevChatLog) => [...prevChatLog, { type: MessageType.BOT, message: botMessage }])
+        const botMessage = await sendMessageCallback(session?.user?.email as string, currentMessage);
+        setMessages((prevMessages) => [...prevMessages, { type: MessageType.BOT, message: botMessage }])
         setIsLoading(false);
     }
 
@@ -49,7 +55,7 @@ const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
                 <div className="overflow-scroll p-6">
                     <div className="flex flex-col space-y-4">
                         {
-                            chatLog.map((message, index) => (
+                            messages.map((message, index) => (
                                 <div key={index} className={`flex ${message.type === MessageType.USER ? 'justify-end' : 'justify-start'
                                     }`}>
                                     <div className={`${message.type === MessageType.USER ? 'bg-sky-500' : 'bg-gray-800'
@@ -61,13 +67,14 @@ const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
                         }
                         {
                             isLoading &&
-                            <div key={chatLog.length} className="flex justify-start">
+                            <div key={messages.length} className="flex justify-start">
                                 <div className="bg-gray-800 rounded-lg p-4 text-white max-w-sm">
                                     <TypingAnimation />
                                 </div>
                             </div>
                         }
                     </div>
+                    <div ref={messageEndRef}></div>
                 </div>
                 <form onSubmit={handleSubmit} className="flex-none p-3 pt-1">
                     <div className="flex rounded-lg border border-gray-700 bg-gray-800">
