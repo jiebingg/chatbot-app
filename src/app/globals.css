@@ -37,10 +37,11 @@ body {
 }
 
 .react-chatbot-kit-chat-container {
-  width: 80vw !important;
+  width: 85vw !important;
 }
 
 .react-chatbot-kit-chat-bot-message {
   @apply ml-3.5 !important;
-  width: 75% !important;
+  max-width: 75% !important;
+  width: auto !important;
 }
