@@ -4,7 +4,7 @@ const UserAvatar = () => {
     const { data: session } = useSession();
 
     return (
-        <div className="avatar-container ml-3.5">
+        <div className="avatar-container mx-3">
             <img src={session?.user?.image as string} />
         </div>
     )

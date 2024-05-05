@@ -5,7 +5,7 @@ import googleLogo from "../../../public/google.png";
 import { signIn, useSession } from 'next-auth/react';
 import { redirect } from "next/navigation";
 
-const LoginComponent = () => {
+const LoginButton = () => {
 
     const { data: session } = useSession();
 
@@ -28,4 +28,4 @@ const LoginComponent = () => {
     );
 }
 
-export default LoginComponent;
+export default LoginButton;

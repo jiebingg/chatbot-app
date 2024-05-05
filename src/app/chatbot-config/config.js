@@ -1,5 +1,4 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
-import UserAvatar from '../components/UserAvatar';
 import ChatbotAvatar from '../components/ChatbotAvatar';
 
 const config = {
@@ -8,8 +7,6 @@ const config = {
   customComponents: {
     // Replaces the default bot avatar
     botAvatar: () => <ChatbotAvatar />,
-    // Replaces the default user icon
-    userAvatar: () => <UserAvatar />,
   },
   customStyles: {
     // Overrides the chatbot message styles
