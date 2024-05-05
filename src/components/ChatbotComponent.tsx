@@ -52,7 +52,7 @@ const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
     return (
         <div className="mx-auto w-[85vw] h-[80vh]">
             <div className="flex flex-col h-full bg-gray-900">
-                <div className="overflow-scroll p-6">
+                <div className="overflow-scroll h-full p-6">
                     <div className="flex flex-col space-y-4">
                         {
                             messages.map((message, index) => (
