@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image";
-import googleLogo from "../../../public/google.png";
+import googleLogo from "@/../public/google.png";
 import { signIn, useSession } from 'next-auth/react';
 import { redirect } from "next/navigation";
 

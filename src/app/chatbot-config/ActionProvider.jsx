@@ -3,7 +3,7 @@ import React from 'react';
 import { useSession } from "next-auth/react";
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
-import { isEmpty } from '../utils/utils';
+import { isEmpty } from '@/utils/utils';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const { data: session } = useSession();

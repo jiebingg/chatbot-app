@@ -1,5 +1,5 @@
-import ChatbotComponent from "../components/ChatbotComponent";
-import Header from "../components/Header";
+import ChatbotComponent from "@/components/ChatbotComponent";
+import Header from "@/components/Header";
 
 const ChatbotPage = () => {
     return (

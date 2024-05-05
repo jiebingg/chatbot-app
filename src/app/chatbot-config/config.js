@@ -1,5 +1,5 @@
 import { createChatBotMessage } from 'react-chatbot-kit';
-import ChatbotAvatar from '../components/ChatbotAvatar';
+import ChatbotAvatar from '@/components/ChatbotAvatar';
 
 const config = {
   initialMessages: [createChatBotMessage(`Hello! Ask me anything.`)],

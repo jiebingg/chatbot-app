@@ -1,8 +1,8 @@
 'use client';
 
-import config from "../chatbot-config/config";
-import ActionProvider from "../chatbot-config/ActionProvider";
-import MessageParser from "../chatbot-config/MessageParser";
+import config from "../app/chatbot-config/config";
+import ActionProvider from "../app/chatbot-config/ActionProvider";
+import MessageParser from "../app/chatbot-config/MessageParser";
 import 'react-chatbot-kit/build/main.css';
 import { Chatbot } from 'react-chatbot-kit';
 

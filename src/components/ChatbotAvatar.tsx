@@ -1,4 +1,4 @@
-import chatbotIcon from "../../../public/chatbot-icon.png";
+import chatbotIcon from "@/../public/chatbot-icon.png";
 import Image from "next/image";
 
 const ChatbotAvatar = () => {
