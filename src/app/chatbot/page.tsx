@@ -3,7 +3,7 @@ import Header from "../components/Header";
 
 const ChatbotPage = () => {
     return (
-        <div className="home-container">
+        <div className="min-h-screen bg-slate-800 justify-center items-center">
             <Header />
             <ChatbotComponent />
         </div>

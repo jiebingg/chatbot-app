@@ -7,9 +7,8 @@ import 'react-chatbot-kit/build/main.css';
 import { Chatbot } from 'react-chatbot-kit';
 
 const ChatbotComponent = () => {
-
     return (
-        <div className="chatbot-container">
+        <div className="mt-12 flex justify-center text-black">
             <Chatbot
                 config={config}
                 messageParser={MessageParser}
