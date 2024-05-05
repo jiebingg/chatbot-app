@@ -34,23 +34,3 @@ body {
   max-width: 40px;
   max-height: 40px;
 }
-
-.react-chatbot-kit-chat-container {
-  width: 85vw !important;
-  height: 75vh !important;
-}
-
-.react-chatbot-kit-chat-bot-message {
-  @apply ml-3.5 w-auto !important;
-  max-width: 75% !important;
-}
-
-.react-chatbot-kit-chat-inner-container {
-  @apply h-full !important;
-}
-
-.react-chatbot-kit-chat-message-container {
-  @apply absolute w-full py-0 h-auto !important;
-  top: 45px !important;
-  bottom: 45px !important;
-}
