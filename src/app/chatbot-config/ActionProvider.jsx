@@ -1,11 +1,19 @@
 import OpenAI from 'openai';
 import React from 'react';
+import { useSession } from "next-auth/react";
+import { NextResponse } from 'next/server';
+import { sql } from '@vercel/postgres';
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
+  const { data: session } = useSession();
   const handleMessage = async (message) => {
-    // const botMessage = createChatBotMessage('Hello. Nice to meet you.');
+    try {
+      await sql`INSERT INTO chats (sender, message) VALUES (${session.user.email}, ${message});`;
+    } catch (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
     const openai = new OpenAI({
-      apiKey: 'sk-proj-ExYckuBgu7PWpp9SnZ0LT3BlbkFJI1G1JAjTOpi01QhkLjTg',
+      apiKey: process.env.OPENAI_API_KEY,
       dangerouslyAllowBrowser: true
     });
     const completion = await openai.chat.completions.create({
@@ -13,8 +21,13 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       model: "gpt-3.5-turbo",
     });
 
-    console.log(completion.choices[0]);
-    const botMessage = createChatBotMessage(completion.choices[0].message.content);
+    const receivedMessage = completion.choices[0].message.content;
+    try {
+      await sql`INSERT INTO chats (sender, message) VALUES ('bot', ${receivedMessage});`;
+    } catch (error) {
+      return NextResponse.json({ error }, { status: 500 });
+    }
+    const botMessage = createChatBotMessage(receivedMessage);
 
     setState((prev) => ({
       ...prev,

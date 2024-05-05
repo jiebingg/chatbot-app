@@ -1,8 +1,10 @@
 import ChatbotComponent from "../components/ChatbotComponent";
+import Header from "../components/Header";
 
 const ChatbotPage = () => {
     return (
-        <div>
+        <div className="home-container">
+            <Header />
             <ChatbotComponent />
         </div>
     );
