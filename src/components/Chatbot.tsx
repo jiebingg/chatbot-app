@@ -1,9 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useRef, useState } from "react";
-import TypingAnimation from "../components/TypingAnimation";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import TypingAnimation from "./TypingAnimation";
 import { isEmpty } from "@/utils/utils";
 
 export enum MessageType {
@@ -16,17 +14,16 @@ export interface MessageObject {
     message: string;
 }
 
-export type ChatProps = {
-    sendMessageCallback: (user: string, message: string) => Promise<string>;
+export type ChatbotProps = {
+    sendMessageCallback: (message: string) => Promise<string>;
 };
 
-const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
+const Chatbot = ({ sendMessageCallback }: ChatbotProps) => {
     const INITIAL_BOT_MESSAGE = 'Hello! Ask me anything';
     const [inputValue, setInputValue] = useState('');
     const [messages, setMessages] = useState<MessageObject[]>([{ type: MessageType.BOT, message: INITIAL_BOT_MESSAGE }]);
     const [isLoading, setIsLoading] = useState(false);
     const messageEndRef = useRef<HTMLInputElement>(null);
-    const { data: session } = useSession();
 
     const scrollTobottom = () => {
         messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,15 +33,13 @@ const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
         scrollTobottom();
     }, [messages]);
 
-    if (!session) return redirect("/");
-
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const currentMessage = inputValue;
         setInputValue('');
         setMessages((prevMessages) => [...prevMessages, { type: MessageType.USER, message: currentMessage }])
         setIsLoading(true);
-        const botMessage = await sendMessageCallback(session?.user?.email as string, currentMessage);
+        const botMessage = await sendMessageCallback(currentMessage);
         setMessages((prevMessages) => [...prevMessages, { type: MessageType.BOT, message: botMessage }])
         setIsLoading(false);
     }
@@ -95,4 +90,4 @@ const ChatbotComponent = ({ sendMessageCallback }: ChatProps) => {
     )
 }
 
-export default ChatbotComponent;
+export default Chatbot;
