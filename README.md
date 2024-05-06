@@ -1,6 +1,10 @@
 # CHATBOT-APP
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Overview
+This is a chatbot app that interfaces with OpenAI. From the homepage, the user will have to first sign in via Google Auth Provider. On successful sign-in, the user can then interact with the chatbot by entering an input message.
+
+***
 
 ## Project Structure
 
