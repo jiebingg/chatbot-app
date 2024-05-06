@@ -21,6 +21,11 @@ The `public` folder contains static files, like images, while the `src` folder c
 
 ***
 
+## GenAI service
+OpenAI's API is being used for this project. The connection is done via an API key, which is stored as an environment variable.
+
+***
+
 ## Architectural Details
 ### Client and Server Layers
 In this project, we have both server and client components. Server components are used to fetch data (i.e. call OpenAI's api), and save data (i.e. save chat history to database). Client components are used to interact with the user on the front-end, such as message inputs and buttons to sign in and out.
@@ -35,11 +40,6 @@ For Chat History Logging, Vercel's Postgres Database is being used for storage. 
 `message`: a string containing the contents of the message
 
 `timestamp`: timestamp of when the message is sent
-
-***
-
-## GenAI service
-OpenAI's API is being used for this project. The connection is done via an API key, which is stored as an environment variable.
 
 ***
 
