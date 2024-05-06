@@ -45,42 +45,37 @@ const Chatbot = ({ sendMessageCallback }: ChatbotProps) => {
     }
 
     return (
-        <div className="mx-auto w-[85vw] h-[80vh]">
-            <div className="flex flex-col h-full bg-gray-900">
+        <div className="mx-auto w-[85vw] h-[80vh] text-white">
+            <div className="h-full bg-gray-900 flex flex-col">
                 <div className="overflow-scroll h-full p-6">
                     <div className="flex flex-col space-y-4">
-                        {
-                            messages.map((message, index) => (
-                                <div key={index} className={`flex ${message.type === MessageType.USER ? 'justify-end' : 'justify-start'
-                                    }`}>
-                                    <div className={`${message.type === MessageType.USER ? 'bg-sky-500' : 'bg-gray-800'
-                                        } rounded-lg p-4 text-white max-w-[75%] w-auto`}>
-                                        {message.message}
-                                    </div>
-                                </div>
-                            ))
-                        }
-                        {
-                            isLoading &&
-                            <div key={messages.length} className="flex justify-start">
-                                <div className="bg-gray-800 rounded-lg p-4 text-white max-w-sm">
-                                    <TypingAnimation />
+                        {messages.map((message, index) => (
+                            <div key={index} className={`flex ${message.type === MessageType.BOT ? 'justify-start' : 'justify-end'}`}>
+                                <div className={`${message.type === MessageType.BOT ? 'bg-gray-800' : 'bg-sky-500'} rounded-lg px-3.5 py-2 max-w-[75%] w-auto`}>
+                                    {message.message}
                                 </div>
                             </div>
+                        ))}
+                        {isLoading &&
+                            (<div key={messages.length} className="flex justify-start">
+                                <div className="bg-gray-800 rounded-lg px-3.5 py-4 max-w-sm">
+                                    <TypingAnimation />
+                                </div>
+                            </div>)
                         }
                     </div>
-                    <div ref={messageEndRef}></div>
+                    <div ref={messageEndRef} />
                 </div>
                 <form onSubmit={handleSubmit} className="flex-none p-3 pt-1">
                     <div className="flex rounded-lg border border-gray-700 bg-gray-800">
-                        <input type="text" className="flex-grow px-4 py-2 bg-transparent text-white focus:outline-none"
+                        <input type="text"
+                            className="flex-grow px-4 py-2 bg-transparent focus:outline-none"
                             placeholder="Type your message..."
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)} />
                         <button type="submit"
                             disabled={isEmpty(inputValue)}
-                            className="bg-sky-600 rounded-lg px-4 py-2 text-white font-semibold focus:outline-none hover:bg-sky-800 transition-colors duration-300
-                            disabled:bg-blue-300 disabled:shadow-none">
+                            className="bg-sky-600 rounded-lg px-4 py-2 font-semibold hover:bg-sky-800 disabled:bg-blue-300 disabled:shadow-none">
                             Send
                         </button>
                     </div>

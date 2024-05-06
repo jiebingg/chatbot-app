@@ -10,7 +10,7 @@ type HeaderProps = {
 
 const Header = ({ user }: HeaderProps) => {
     return (
-        <div className="flex flex-row justify-between py-4 border-b-2 border-b-neutral-700 items-center">
+        <div className="flex flex-row justify-between py-4 border-b-2 border-b-neutral-700 items-center text-white">
             <div className="ml-8 my-2 text-xl font-semibold flex flex-row items-center">
                 <UserAvatar imageLink={user.image} />
                 {user.name}

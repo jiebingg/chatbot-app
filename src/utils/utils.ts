@@ -2,7 +2,7 @@ import { sql } from '@vercel/postgres';
 import { NextResponse } from 'next/server';
 
 export const isEmpty = (str: string) => {
-    return (!str || str.length === 0);
+    return (!str || str.length === 0 || str.trim().length === 0);
 }
 
 export const saveUserMessage = async (user: string, message: string) => {
