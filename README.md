@@ -12,6 +12,7 @@ This is a chatbot app that interfaces with OpenAI. From the homepage, the user w
 chatbot-app/
 ├── public/
 ├── src/
+│ ├── app/
 │ ├── components/
 │ ├── utils/
 │ ├── lib/
